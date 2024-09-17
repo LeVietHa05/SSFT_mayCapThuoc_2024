@@ -13,16 +13,36 @@ const AccountSchema = new Schema({
         type: String,
         required: true
     },
-    // pill: [{
-    //     num: {
-    //         type: Number,
-    //         required: true
-    //     },
-    //     typeOf: {
-    //         type: Number,
-    //         required: true
-    //     }
-    // }]
+    boughtHistory: [{
+        time: {
+            type: Date,
+            required: true
+        },
+        type1: {
+            type: Number,
+            default: 0
+        },
+        type2: {
+            type: Number,
+            default: 0
+        },
+        type3: {
+            type: Number,
+            default: 0
+        },
+        type4: {
+            type: Number,
+            default: 0
+        },
+        type5: {
+            type: Number,
+            default: 0
+        },
+        type6: {
+            type: Number,
+            default: 0
+        },
+    }]
 });
 
 module.exports = require('mongoose').model('Account', AccountSchema);

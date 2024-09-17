@@ -3,8 +3,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config()
+
+const bodyParser = require('body-parser');
+
 const mongoose = require('mongoose');
-console.log(process.env.DB_URL)
+
 mongoose.connect(process.env.DB_URL, {
     newUrlParser: true,
     useUnifiedTopology: true
@@ -26,6 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
