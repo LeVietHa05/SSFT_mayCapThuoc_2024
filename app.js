@@ -7,11 +7,7 @@ require('dotenv').config()
 const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
-
-mongoose.connect(process.env.DB_URL, {
-    newUrlParser: true,
-    useUnifiedTopology: true
-})
+mongoose.connect(process.env.DB_URL)
     .then(() => {
         console.log("Connected to database");
     })
