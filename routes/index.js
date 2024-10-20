@@ -3,7 +3,7 @@ var router = express.Router();
 const Account = require('../models/Account.js');
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.sendFile('/views/Tablet.html', { root: 'public' });
 });
 
 router.post("/login", async (req, res) => {
