@@ -37,15 +37,15 @@ io.on("connection", function (socket) {
     // so server can findout which user is using the hardware
     socket.on("pills", async (data) => {
         // String data : "0987654321,1:1,2:1,3:1,4:0,5:0,6:0"
-        console.log(`message from ${data.deviceID ? data.deviceID : 'web'} via socket id: ${socket.id} on topic phoneNumber`);
+        console.log(`message from ${data.deviceID ? data.deviceID : 'web'} via socket id: ${socket.id} on topic pills`);
         let pills = data.split(",");
         let phoneNumber = pills.shift();
         let newPills = [];
-        newPills = pills.split(",");
+        newPills = pills.slice(0);
         let person = await Account.find({ phoneNumber: phoneNumber });
         if (person.length == 0) {
             console.log(`[ERROR] Can't find user with phone number: ${phoneNumber}`);
-            socket.broadcast.emit("pills", { error: "Can't find user with phone number" });
+            io.emit("pills", { error: "Can't find user with phone number" });
             return;
         }
         person = person[0];

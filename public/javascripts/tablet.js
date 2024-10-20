@@ -35,6 +35,12 @@ function renderControl() {
             stepScreen.classList.add('deSelected', "flex-1", "display-flex-column");
         });
     }
+
+    if (step != 'step7_payment') {
+        step7_payment_paymentMethod.style = 'display: flex!important';
+        step7_payment_qr_container.style = 'display: none!important';
+    }
+
     function selectStep(stepScreen) {
         deSelectAll();
         stepScreen.classList.remove('deSelected');
@@ -261,6 +267,7 @@ function renderPillDetails() {
 }
 
 function renderCart() {
+    console.log("cart rendering")
     let container = document.getElementById('step6_cart_pillList')
 
     if (cart.length > 0) {
@@ -414,15 +421,24 @@ function renderPayment() {
         let qrContent = `0000000000,1:${item1Quantity},2:${item2Quantity},3:${item3Quantity},4:${item4Quantity},5:${item5Quantity},6:${item6Quantity}`;
         return qrContent;
     }
-
-    new QRCode(document.getElementById('step7_payment_qr'), qrContentGen());
-
+    let qrDiv = document.getElementById('step7_payment_qr');
+    qrDiv.innerHTML = ""
+    let qrContent = qrContentGen()
+    new QRCode(qrDiv, qrContent);
+    // socket
+    
     step7_done.addEventListener('click', function () {
         step7_payment_paymentMethod.style = 'display: none!important';
         step7_payment_qr_container.style = 'display: flex!important';
         cart = [];
         checkOut = [];
+        sendMessage("pills", qrContent)
     })
+
+    let checkOutInputs = document.querySelectorAll('#step6_cart input[type="checkbox"]');
+    checkOutInputs.forEach(input => {
+        input.checked = false;
+    });
 }
 
 // RULES-001: DO NOT TOUCH INSERT FNC
