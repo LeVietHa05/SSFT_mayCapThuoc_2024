@@ -1,3 +1,4 @@
+
 // initial variables
 var cateList = [];
 var currentPill
@@ -82,7 +83,7 @@ function renderControl() {
 }
 renderControl();
 
-function pillQuantityControl(pill, quantity, quantityDisplayId) {
+function pillQuantityControl(pill, quantity, quantityDisplayId, makeItCheckOut = false) {
     console.log(quantity);
     let cartPill = cart.find((cartPill) => cartPill.pill.pill_name === pill.pill_name);
     let quantityDisplay = document.getElementById(quantityDisplayId);
@@ -100,7 +101,7 @@ function pillQuantityControl(pill, quantity, quantityDisplayId) {
                 quantityDisplay.textContent = cartPill.quantity;
             }
         }
-    } else if (quantity == 1) {
+    } else if (quantity >= 1) {
         if (quantity > pill.pill_quantity) {
             alert('Out of stock');
         } else {
@@ -110,7 +111,12 @@ function pillQuantityControl(pill, quantity, quantityDisplayId) {
             }
         }
     }
-
+    if (makeItCheckOut) {
+        cart.forEach((e, i) => {
+            checkOut[i] = e
+        })
+        console.log(checkOut)
+    }
     console.log('cart:', cart);
 }
 
