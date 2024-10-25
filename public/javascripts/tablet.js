@@ -34,6 +34,8 @@ function renderControl() {
     let step5_PillDetail = document.getElementById('step5_PillDetail');
     let step6_cart = document.getElementById('step6_cart')
     let step7_payment = document.getElementById('step7_payment')
+    let step8_qrScan = document.getElementById('step8_qrScan')
+    let step9_consulting = document.getElementById('step9_consulting')
     let allStep = document.querySelectorAll('section[id^="step"]');
     function deSelectAll() {
         allStep.forEach((stepScreen) => {
@@ -77,6 +79,13 @@ function renderControl() {
         case 'step7_payment':
             selectStep(step7_payment)
             renderPayment()
+            break;
+        case 'step8_qrScan':
+            selectStep(step8_qrScan)
+            break;
+        case 'step9_consulting':
+            selectStep(step9_consulting)
+            break;
         default:
             break;
     }

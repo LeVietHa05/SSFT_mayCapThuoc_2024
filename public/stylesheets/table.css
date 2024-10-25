@@ -450,7 +450,8 @@ img {
 }
 
 #step6_cart div[onclick="changeStep('step6_cart')"],
-#step7_payment div[onclick="changeStep('step6_cart')"] {
+#step7_payment div[onclick="changeStep('step6_cart')"],
+#step8_qrScan div[onclick="changeStep('step6_cart')"] {
     visibility: hidden;
 }
 
