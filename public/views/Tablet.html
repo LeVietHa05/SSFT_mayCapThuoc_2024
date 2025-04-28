@@ -10,6 +10,7 @@
 
 <body style="height: 100vh" class="display-flex-column">
     <section id="step1">
+        <div class="speakToText"></div>
         <div style="
           border-radius: 0px 0px 3.125rem 3.125rem;
           background-color: var(--blue-100);
@@ -48,6 +49,7 @@
     </section>
 
     <section id="step2" class="padding-v-2 margin-v-2">
+        <div class="speakToText"></div>
         <div class="margin-auto display-flex-center text-bold gap-1" style="font-size: 1.5rem">
             <div class="logo"></div>
             <p>Máy bán thuốc tự động<br />Chăm sóc sức khỏe mọi lúc, mọi nơi!</p>
@@ -283,6 +285,23 @@
             <div class="btn-round bg-red-100 padding-1 padding-h-2 text-bold" style="font-size: 1.5rem;"
                 id="step7_done">
                 Thanh toán
+            </div>
+        </div>
+    </section>
+
+    <section id="chat" style="">
+        <div class="chat-main">
+            <div class="chat-close"><img src="/icons/close.svg" alt="close " onclick="closeChat()"/></div>
+            <div class="chat-header">
+                <img src="/icons/logo.svg" alt="logo">
+                <img src="/icons/mascot.svg" alt="logo">
+            </div>
+            <div class="chat-body " id="chatBody">
+                <!-- append msg here -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Nhập tin nhắn...">
+                <button onclick="sendChatMessage()">Gửi</button>
             </div>
         </div>
     </section>
