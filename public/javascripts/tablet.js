@@ -456,6 +456,7 @@ function renderPayment() {
         cart = [];
         checkOut = [];
         sendMessage('pills', qr);
+        sendMessage('/web/pills', qr);
         let countdown = 10;
         let intervalID = setInterval(() => {
             countdown--;
