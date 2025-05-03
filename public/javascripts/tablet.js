@@ -585,6 +585,9 @@ function insertListGen(data, parent) {
 const chatBody = document.getElementById('chatBody');
 const userInput = document.getElementById('userInput');
 
+const sidebar = document.getElementById('sidebar');
+const sidebarBody = document.getElementById('sidebarBody');
+
 // Handle sending messages
 function sendChatMessage() {
     const message = userInput.value.trim();
@@ -648,6 +651,28 @@ async function callAIAPI(message) {
     }
 }
 
+// Populate sidebar with questions
+function populateSidebar() {
+    dataSets.forEach(({ ques, ans }, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'sidebar-question';
+        questionDiv.textContent = ques;
+        questionDiv.addEventListener('click', () => {
+            // Add question and answer to chat
+            addMessage(ques, 'user');
+            addMessage(ans, 'ai');
+            // Scroll to bottom
+            chatBody.scrollTop = chatBody.scrollHeight;
+        });
+        sidebarBody.appendChild(questionDiv);
+    });
+}
+populateSidebar();
+
+// Toggle sidebar
+function toggleSidebar() {
+    sidebar.classList.toggle('collapsed');
+}
 
 // Show loading indicator
 function showLoading() {
