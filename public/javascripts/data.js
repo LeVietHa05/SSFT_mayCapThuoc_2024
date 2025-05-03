@@ -432,7 +432,7 @@ let pillList = [
         pill_sellPrice: 5000,
         pill_buyPrice: 0,
         pill_packKind: '1 vỉ x 10 viên',
-        pill_imgAddress: ['images/pill/Cảm_lạnh_thông_thường_-_TK3.png'],
+        pill_imgAddress: ['images/pill/Cam_lanh_thong_thuong_TK3.png'],
         pill_indication: ['Điều trị triệu chứng trong các trường hợp: Cảm sốt, đau đầu, đau nửa đầu, đau răng, đau họng, đau sau nhổ răng, đau bụng kinh, đau cơ xương, đau do viêm khớp, đau dây thần kinh, hạ sốt trong viêm nhiễm.'],
         pill_use: [
             'Thuốc dùng đường uống.'
@@ -526,7 +526,7 @@ let pillList = [
         pill_sellPrice: 4300,
         pill_buyPrice: 0,
         pill_packKind: '1 vỉ x 10 viên',
-        pill_imgAddress: [`images/pill/Thuốc_giảm_đau_và_hạ_sốt_-_Ibuprofen.png`],
+        pill_imgAddress: [`images/pill/Thuoc_giam_dau_va_ha_sot_Ibuprofen.png`],
         pill_indication: [
             `Thuốc Ibuprofen 200 Nadyphar 10x10 được chỉ định dùng trong các trường hợp sau:`,
             [

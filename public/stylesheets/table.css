@@ -620,3 +620,35 @@ img {
   transition: all 0.3s ease;
   transform: rotate(90deg);
 }
+
+/* Loading Indicator Styles */
+#chat .loading {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  max-width: 70%;
+}
+
+#chat .loading .spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ccc;
+  border-top: 3px solid var(--green-100);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+#chat .loading .text {
+  color: var(--textBlack);
+  font-size: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

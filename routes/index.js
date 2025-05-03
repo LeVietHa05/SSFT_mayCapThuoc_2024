@@ -64,4 +64,47 @@ router.post("/newBill", async (req, res) => {
   }
 })
 
+const aiID = process.env.AI_ID;
+const ragToken = process.env.RAG_TOKEN;
+console.log(aiID);
+console.log(ragToken);
+
+router.post('/getAiChat', async (req, res) => {
+  const message = req.body.message;
+  if (!message) {
+    return res.status(400).json({ error: 'Message is required' });
+  }
+  try {
+    const response = await fetch(`https://api.lenguyenbaolong.art/api/v1/chats_openai/${aiID}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${ragToken}`,
+      },
+      body: JSON.stringify({
+        model: 'deepseek-chat@DeepSeek',
+        messages: [
+          {
+            role: 'user',
+            content: message,
+          },
+        ],
+        max_tokens: 256,
+        stream: false,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`External API error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('API response:', data);
+    return res.status(200).json({ data });
+  } catch (error) {
+    console.error('Error in /getAiChat:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;

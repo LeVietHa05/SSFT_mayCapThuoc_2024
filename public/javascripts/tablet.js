@@ -486,7 +486,7 @@ insertLogo();
 function insertMascot() {
     let mascots = document.querySelectorAll('.absMascot');
     mascots.forEach((mascot) => {
-        mascot.innerHTML = `<img src="/icons/mascot.png" alt="mascot" class="mascot" />
+        mascot.innerHTML = `<img src="/icons/mascot.svg" alt="mascot" class="mascot" />
 `;
     });
 }
@@ -594,18 +594,22 @@ function sendChatMessage() {
     addMessage(message, 'user');
     userInput.value = '';
 
+    // Show loading indicator
+    showLoading();
+
     // Call API (placeholder)
     callAIAPI(message)
-        .then(response => response.json())
+        // .then(response => console.log(response))
         .then(response => {
             console.log('response:', response);
+            hideLoading();
             addMessage(response.choices[0].message.content, 'ai');
         })
         .catch(error => {
             console.error('Error:', error);
+            hideLoading();
             addMessage('Error: Could not get response', 'ai');
         });
-
     // Scroll to bottom
     chatBody.scrollTop = chatBody.scrollHeight;
 }
@@ -621,26 +625,48 @@ function addMessage(text, type) {
 
 // Placeholder API call
 async function callAIAPI(message) {
-    return fetch(`https://api.lenguyenbaolong.art/api/v1/chats_openai/${aiID}/chat/completions`, {
-        method: 'POST',
-        headers: {
-            ContentType: 'application/json',
-            Authorization: `Bearer ${ragToken}`,
-        },
-        body: JSON.stringify({
+    try {
+        const response = await fetch('/getAiChat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Specify JSON content type
+            },
+            body: JSON.stringify({
+                message: message,
+            }),
+        });
 
-            "model": "deepseek-chat@DeepSeek",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": message
-                }
-            ],
-            "max_tokens": 256,
-            "stream": false
-        })
-    })
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
+        const data = await response.json();
+        return data.data; // Adjust based on your backend response structure
+    } catch (error) {
+        console.error('Error calling AI API:', error);
+        throw error;
+    }
+}
+
+
+// Show loading indicator
+function showLoading() {
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'loading';
+    loadingDiv.id = 'loadingIndicator';
+    loadingDiv.innerHTML = `
+                <div class="spinner"></div>
+                <span class="text">Đang tìm câu trả lời...</span>
+            `;
+    chatBody.appendChild(loadingDiv);
+}
+
+// Hide loading indicator
+function hideLoading() {
+    const loadingDiv = document.getElementById('loadingIndicator');
+    if (loadingDiv) {
+        loadingDiv.remove();
+    }
 }
 
 function closeChat() {
